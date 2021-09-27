@@ -1,0 +1,172 @@
+.custom-icon-tab li:after{
+    content:'|'; margin:0 20px;
+}
+
+.custom-icon-tab li a i{
+    color: #9e9e9e;
+    margin-right:14px;
+}
+.custom-icon-tab li.active a i{
+    color: #5ec1e0;
+}
+.custom-icon-tab li.active a {
+    color: #565656;
+}
+
+.badge-approved{
+    background:#EAF5E4;
+    color:#73866c;
+    border:1px solid #73866c;
+    border-radius:3px;
+    padding:5px;
+}
+.badge-pending{
+    background:#FAF0E2;
+    color:#BAA483;
+    border:1px solid #BAA483;
+    border-radius:3px;
+    padding:5px;
+}
+.badge-failed{
+    background:#F4D7D8;
+    color:#B76B6F;
+    border:1px solid #B76B6F;
+    border-radius:3px;
+    padding:5px;
+}
+
+.search > div {
+    display: inline-block;
+    position: relative;
+}
+  
+.search > div:after {
+    content: "";
+    background: #5ec1e0;
+    width: 4px;
+    height: 13px;
+    position: absolute;
+    top: 24px;
+    right: -1px;
+    transform: rotate(135deg);
+}
+  
+.search > div > input {
+    color: #565656;
+    font-size: 16px;
+    background: white;
+    width: 25px;
+    height: 25px;
+    padding: 13px;
+    border: solid 3px #5ec1e0;
+    outline: none;
+    border-radius: 35px;
+    transition: width 0.5s;
+}
+  
+.search > div > input::placeholder {
+    color: #9e9e9e;
+    opacity: 1;
+}
+  
+.search > div > input::-ms-placeholder {
+    color: #9e9e9e;
+}
+  
+.search > div > input::-ms-input-placeholder {
+    color: #9e9e9e;
+}
+  
+.search > div > input:focus,
+.search > div > input:valid {
+    width: 120px;
+}
+@media (min-width: 768px) {
+    .search > div > input:focus,
+    .search > div > input:valid {
+        width: 250px;
+    }
+}
+
+.custom-box-button{
+    border:1px solid #e8e8e8;
+    border-radius:8px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.custom-box-button.custom-size{
+    width:244px; 
+    min-height:138px;
+}
+
+.custom-box-button.custom-border-dashed{
+    border: 1px dashed gray ;
+}
+
+.badge-image-bank{
+    object-fit:contain;
+    width:58px; 
+    height:50px
+}
+
+.badge-image-padala-counter{
+    object-fit:contain;
+    width:70px; 
+    height:70px
+}
+
+.custom-border-bottom{
+    border-bottom: 1px solid #5ec1e0;
+}
+
+.font-70{
+    font-size:70px;
+}
+
+.add-image-holder {
+    width: 150px;
+    height: 150px;
+}
+
+.add-image-holder .overlay {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+}
+
+.add-image-holder:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .7);
+}
+
+.add-button {
+    position: relative;
+    width: 100%;
+    top: -80%;
+    transform: translateY(80%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity .10s ease;
+}
+
+.add-image-holder:hover .add-button {
+    opacity: 1;
+}
+
+.otp-box-style {
+    padding: 15px;
+    background: aliceblue;
+    border-radius: 10px;
+}
+
+.field-icon {
+  position: absolute;
+  right:0;
+  margin-right:10px;
+  z-index: 999999999;
+}

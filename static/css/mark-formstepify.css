@@ -1,0 +1,116 @@
+.mark-stepify-progress-list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 50px;
+    counter-reset: step;
+    display: flex;
+}
+
+.mark-stepify-progress-list > li {
+    text-align: center;
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+.mark-stepify-progress-list > li > span {
+    padding: 0.5em 1.3em;
+    background: white;
+    position: relative;
+    font-size: 1.1em;
+    z-index: 1;
+    color: #434343;
+}
+
+.mark-stepify-progress-list > li:before{
+    font-family: 'boxicons' !important;
+    content: "\e9f0";
+    counter-increment: step;
+    display: flex;
+    font-size: 1.5em;
+    background-color: #3490DC;
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.mark-stepify-progress-list > li:not(:last-child):after{
+    content: "";
+    width: 90%;
+    height: 3px;
+    background-color: #3490DC;
+    position: absolute;
+    top: 20px;
+    z-index: 0;
+}
+.mark-stepify-progress-list > li.active:before,
+.mark-stepify-progress-list > li.active ~ li:before {
+    font-family: inherit !important;
+    font-size: 1.2em;
+    content: counter(step);
+}
+
+.mark-stepify-progress-list > li.active ~ li > span {
+    color: #94A3B2;
+}
+
+.mark-stepify-progress-list > li.active:not(:last-child):after,
+.mark-stepify-progress-list > li.active ~ li:before,
+.mark-stepify-progress-list > li.active ~ li:after{
+    background-color: #E4E9EF;
+}
+
+
+
+
+
+
+
+
+
+/* Extra Small, Phones  */
+@media only screen and (min-width : 320px) {
+
+    .mark-stepify-progress-list .step-label {
+        display: none;
+    }
+
+    .mark-stepify-progress-list li:last-child {
+        max-width:45px;
+    }
+}
+
+
+/* Small Devices, Phones */
+@media only screen and (min-width : 576px) {
+}
+
+
+/* Medium Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .mark-stepify-progress-list .step-label {
+        display: initial;
+    }
+
+    .mark-stepify-progress-list li:last-child {
+        max-width:initial;
+    }
+}
+
+/* Large Devices, Desktops */
+@media only screen and (min-width : 992px) {
+}
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+}

@@ -1,0 +1,116 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load cus_tags %}
+{% load cus_filters %}
+
+{% block page_content %}
+<div class="page-content-cont" data-scroll-detect data-target="#page_title_cont">
+    <div class="row">
+        <div class="col-12 plr30">
+            <form action="" method="POST" target="_blank">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 mb30">
+                        <div class="white-panel dpad">
+                            <div class="form-row mb20">
+                                <div class="col-12 col-md-4 mt-2 mt-md-0">
+                                    <label >Search by Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="filter_key" name="filter_key" aria-label="Search"
+                                               placeholder="Search..">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 mt-2 mt-md-0">
+                                    <label >Time Filter</label>
+                                    <div class="row">
+                                        <div class="col-6 pr-1">
+                                            <input id="filter_date_from" placeholder="Enter From Date" autocomplete="off" class="form-control datepicker"/>
+                                        </div>
+                                        <div class="col-6 pr-1">
+                                            <input id="filter_date_to" placeholder="Enter To Date" autocomplete="off" class="form-control datepicker"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-lg-9 mb30">
+                        <label class="lg-text">Appointments</label>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-3">
+                         <div class="form-group">
+                             <a href="{% url 'main:modal_create_appointment' %}" class="custom-btn btn-light-blue full xl w-100"
+                               data-open-modal
+                               data-modal-size="modal-lg">
+                                ADD APPOINTMENT
+                            </a>
+                         </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div id="appointment_list_cont" class="col-12 mb30">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+{{block.super}}
+<script>
+    $(document).ready(function(){
+        load_appointment_list();
+
+        $("#filter_date_from").datepicker({
+            'orientation': 'bottom',
+            'format': 'MM dd, yyyy',
+            'todayHighlight': true,
+        });
+
+        $("#filter_date_to").datepicker({
+            'orientation': 'bottom',
+            'format': 'MM dd, yyyy',
+            'todayHighlight': true
+        });
+
+        $("#filter_key").on("input", debounced(500, function(e){
+            load_appointment_list();
+        }));
+
+        $("#filter_date_from").on("change", function(e){
+            load_appointment_list();
+        });
+
+        $("#filter_date_to").on("change", function(e){
+            load_appointment_list();
+        });
+
+        $(document).on("click", ".paginate-navigator", function(e){
+            e.preventDefault();
+            var page = $(this).data("page");
+            load_appointment_list(page);
+        });
+    });
+
+    var load_appointment_list = function(page=1){
+        var key = $("#filter_key").val();
+        var date_from =  $("#filter_date_from").val();
+        var date_to = $("#filter_date_to").val();
+
+        var query_params = urlParameterize({
+            name: key,
+            date_from: date_from,
+            date_to: date_to,
+            page: page
+        });
+
+        $("#appointment_list_cont").loadSubpage({
+            url: "{% url 'main:subpage_appointment_list' %}?"+query_params,
+        });
+    }
+</script>
+{% endblock %}

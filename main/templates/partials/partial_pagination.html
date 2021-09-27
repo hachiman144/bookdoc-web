@@ -1,0 +1,25 @@
+{% load static %}
+{% load cus_filters %}
+{% load cus_tags %}
+
+<div class="row">
+    <div class="col-12 center clearfix plr30">
+        <div class="paginate-group float-right">
+            {% if page_data.links.previous %}
+            <button class="paginate-navigator" data-page="{{page_data.links.current|add:-1}}"><i class="fas fa-chevron-left"></i></button>
+            {% else %}
+            <button class="paginate-navigator" disabled><i class="fas fa-chevron-left"></i></button>
+            {% endif %}
+            {%if not page_data.results%}
+                <span class="paginate-label">0 of 0</span>
+            {%else%}
+                <span class="paginate-label">{{page_data.links.current}} of {% if page_data.links.last == 0 %}1{% else %}{{ page_data.links.last }}{% endif %}</span>
+            {%endif%}
+            {% if page_data.links.next %}
+            <button class="paginate-navigator" data-page="{{page_data.links.current|add:1}}"><i class="fas fa-chevron-right"></i></button>
+            {% else %}
+            <button class="paginate-navigator" disabled><i class="fas fa-chevron-right"></i></button>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+{% load static %}
+{% load cus_tags %}
+{% load cus_filters %}
+
+
+<div class="modal-body custom-modal-body">
+    <button type="button" class="modal-close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <form id="form_appointment_update" method="POST" action="{% url 'main:ajax_update_appointment' %}">
+        <div class="row mb35">
+            <div class="col-12">
+                <div class="lg-text text-blue bold">Update Appointment</div>
+            </div>
+        </div>
+        <div class="row mb35">
+            <div class="col-12">
+                <div class="row">
+                    <input type="hidden" name="id" value="{{data.id}}">
+                    <div class="col-12 col-md-4 mb15">
+                        <label class="input-label required">First Name</label>
+                        <div class="custom-input-group">
+                            <input type="text" name="first_name" value="{{data.patient.first_name|title}}" placeholder="e.g. John" class="form-control sm full-width" required/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb15 plr15">
+                        <label class="input-label">Middle Name</label>
+                        <div class="custom-input-group">
+                            <input type="text" name="middle_name" placeholder="e.g. Anderson" value="{{data.patient.middle_name|title}}" class="form-control sm full-width"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb15 plr15">
+                        <label class="input-label required">Last Name</label>
+                        <div class="custom-input-group">
+                            <input type="text" name="last_name" placeholder="e.g. Doe" value="{{data.patient.last_name|title}}" class="form-control sm full-width" required/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb15 plr15">
+                        <label class="input-label required">Date</label>
+                        <div class="custom-input-group">
+                            <input id="date" name="date" placeholder="Enter Date" value="" autocomplete="off" class="custom-input datepicker"
+                                required />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb15 plr15">
+                        <label class="input-label required">Time From</label>
+                        <div class="custom-input-group">
+                           <input id="time-from" name="time_from" autocomplete="off" class="custom-input"
+                                required />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb15 plr15">
+                        <label class="input-label required">Time To</label>
+                        <div class="custom-input-group">
+                            <input id="time-to" name="time_to" autocomplete="off"" class="custom-input"
+                                required />
+                        </div>
+                    </div>
+                    <div class="col-12 mb15 plr15">
+                        <label class="input-label required">Comment</label>
+                        <div class="custom-input-group">
+                            <textarea name="comment" placeholder="Comment Here" class="form-control sm full-width">{{data.comment}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="proceed-btn custom-btn btn-light-blue full-width">
+                    Submit
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="custom-btn btn-gray line-only full-width" data-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+$(document).ready(function(e){
+    $("#form_appointment_update").markFormfy({
+        content_type: false,
+        process_data: false,
+        additional_data: {},
+        clear_after: true,
+        headers: {"X-CSRFToken": "{{csrf_token}}",},
+        on_init: function(_obj){
+            _obj.find("#date").datepicker({
+                'orientation': 'bottom',
+                'format': 'MM, dd yyyy',
+                'todayHighlight': true,
+                'daysOfWeekDisabled': [0]
+            });
+            _obj.find('#time-from').timepicker({
+                'scrollDefault': 'now',
+                'listWidth': 1,
+                'minTime': '9:00am',
+                'maxTime': '5:00pm'
+            });
+            _obj.find('#time-to').timepicker({
+                'scrollDefault': 'now',
+                'listWidth': 1,
+                'minTime': '9:00am',
+                'maxTime': '5:00pm'
+            });
+            _obj.find("#date").datepicker("setDate", new Date('{{data.date_from}}'));
+            _obj.find("#time-from").timepicker("setTime", new Date('{{data.date_from}}'));
+            _obj.find("#time-to").timepicker("setTime", new Date('{{data.date_to}}'));
+        },
+        success: function(response, _obj){
+            if(response.success){
+                _obj.init();
+                load_appointment_list()
+                $("#gen_alert_box").markAlertfy({
+                    type: "modal",
+                    alert_type: "success",
+                    alert_title: "Success!",
+                    alert_message: response.message,
+                });
+                $("#gen_modal").modal("hide");
+            }else{
+                $("#gen_alert_box").markAlertfy({
+                    type: "modal",
+                    alert_type: 'error',
+                    alert_title: 'Error!',
+                    alert_message: response.message
+                });
+            }
+        },
+        error: function(response){$("#general_alert").markAlertfy({type: "modal"});},
+        pre_submit: function(response){}
+    });
+});
+</script>

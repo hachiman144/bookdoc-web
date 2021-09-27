@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load cus_tags %}
+    {% load cus_filters %}
+    <meta charset="UTF-8">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
+    <title>Book Doc</title>
+
+    <meta name="description" content="Book Doctors Online.">
+    <meta name="keywords" content="old st, doctor booking application">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta property="og:type" content="site" />
+    <meta property="og:title" content="Book Doc" />
+    <meta property="og:description" content="Book Doctors Online." />
+    <meta property="og:site_name" content="Book Doc" />
+    <meta name="activenavs" content="{{meta.activenavs}}" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-datepicker3.standalone.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/timepicker.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/theme-styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/theme-media.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gen-styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gen-media.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mark-alertfy.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/jam-icons/css/jam.min.css">
+    {% block header_css %}{% endblock %}
+    {% block header_js %}{% endblock %}
+</head>
+<body>
+    <section>
+        <div class="body-wrapper">
+            <div class="sidebar-cont sidebar-component">
+                <div class="sidebar">
+                    {% include 'partials/partial_sidebar.html' %}
+                </div>
+            </div>
+            <div class="sidebar-cont-underlay" data-sidebar-toggler data-target=".sidebar-component" data-action="close"></div>
+            <div class="content-cont">
+                {% block page_header %}
+                {% include 'partials/partial_page_header.html' %}
+                {% endblock %}
+                {% block page_content %}
+                <div class="page-content-cont" data-scroll-detect data-target="#page_title_cont">
+                    <div class="row">
+                        <div class="col-12 center">
+                            <h1>THERE IS NO CONTENT HERE YET!</h1>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+
+{% block gen_alert_box %}
+    <section>
+        <div id="gen_alert_box" style="position:relative; z-index: 1146;"></div>
+    </section>
+{% endblock %}
+
+
+{% block gen_modal %}
+    <section>
+        <div id="gen_modal" class="modal fade" role="dialog">
+            <div id="modal_dialog" role="document">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"
+            integrity="sha256-TQq84xX6vkwR0Qs1qH5ADkP+MvH0W+9E7TdHJsoIQiM="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/mark-alertfy.js' %}"></script>
+    <script src="{% static 'js/timepicker.min.js' %}"></script>
+    {% block footer_js %}
+    <script>
+    </script>
+    {% endblock %}
+</body>
+</html>

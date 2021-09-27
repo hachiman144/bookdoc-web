@@ -1,0 +1,64 @@
+{% load static %}
+{% load cus_tags %}
+{% load cus_filters %}
+
+<div class="modal-body custom-modal-body">
+    <button type="button" class="modal-close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <form id="form_appointment_delete" method="POST" action="{% url 'main:ajax_delete_appointment' %}">
+        <div class="row mtb25">
+            <div class="col-12 center mb25">
+                <img class="modal-icon" src="{% static 'img/icon-question.svg' %}"/>
+            </div>
+            <div class="col-12 center mb25">
+                <input type="hidden" name="appointment_id" value="{{appointment_id}}">
+                <div class="lg-text text-blue bold">Are you sure to delete this appointment?</div>
+                <div class="sm-text text-light-gray">
+                    You are about delete this appointment.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="proceed-btn custom-btn btn-light-blue full-width">
+                    Yes, I'm Sure
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="custom-btn btn-gray line-only full-width" data-dismiss="modal">
+                    No, I'm Not
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+$(document).ready(function(e){
+    $("#form_appointment_delete").markFormfy({
+        content_type: false,
+        process_data: false,
+        additional_data: {},
+        clear_after: true,
+        headers: {"X-CSRFToken": "{{csrf_token}}",},
+        on_init: function(form){
+        },
+        success: function(response){
+            $("#gen_alert_box").markAlertfy({
+                type: "modal",
+                alert_type: 'success',
+                alert_title: 'Success!',
+                alert_message: response.alert_message,
+            });
+
+            $("#gen_modal").modal("hide");
+            if(response.success){
+                load_appointment_list()
+            }
+        },
+        error: function(response){$("#general_alert").markAlertfy({type: "modal"});},
+        pre_submit: function(response){}
+    });
+});
+</script>

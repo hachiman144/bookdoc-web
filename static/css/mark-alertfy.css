@@ -1,0 +1,81 @@
+.mark-alert-modal .modal-content > .modal-body {
+    padding: 3em;
+}
+
+@media (min-width: 576px){
+    .mark-alert-modal .modal-sm {
+        max-width: 450px;
+    }
+}
+.mark-alert-modal .modal-content {
+    background: #FFFFFF;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.15);
+    border-radius: 0.3em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.mark-alert-modal.success > .modal-content{
+    border: 1px solid rgba(13, 66, 1, 0.2);
+}
+.mark-alert-modal.error > .modal-content{
+    border: 1px solid rgba(130, 52, 52, 0.2);
+}
+.mark-alert-modal.warning > .modal-content{
+    border: 1px solid rgba(130, 75, 0, 0.2);
+}
+
+.mark-alert-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0px;
+    background: none;
+    color: #000000;
+    border-radius: 100px;
+    font-size: 1.2em;
+    height: 35px;
+    width: 35px;
+    padding: 0px;
+    opacity: 0.7;
+    z-index: 1051;
+}
+.mark-alert-btn-close:hover {
+    opacity: 0.85;
+    background: rgba(0,0,0,0.05);
+}
+.mark-alert-btn-close:active {
+    opacity: 1;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.mark-alert-modal .mark-alert-title,
+.mark-alert-modal .mark-alert-text {
+    color: #202327;
+    margin-bottom: 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.mark-alert-content > .mark-alert-icon {
+    width: 75px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.mark-alert-content > .mark-alert-title {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+.mark-alert-content > .mark-alert-text {
+    font-size: 0.9em;
+
+}
+.alert-error{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

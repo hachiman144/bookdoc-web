@@ -1,0 +1,56 @@
+{% load static %}
+{% load cus_tags %}
+{% load cus_filters %}
+
+<div class="white-panel ptb30 table-responsive">
+    <div class="row m-0">
+        <div class="col-12">
+            <table class="table custom-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Schedule</th>
+                    <th>Comment</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data.results %}
+                <tr>
+                    <td>{{item.patient|get_name}}</td>
+                    <td>{{item.date_from|get_schedule_string:item.date_to}}</td>
+                    <td>{{item.comment}}</td>
+                    <td>
+                        <div class="coop-option float-right">
+                            <button class="table-action-btn" data-toggle="dropdown">
+                                <i class='bx bx-dots-vertical-rounded'></i>
+                            </button>
+                            <div class="dropdown-menu custom-dropdown dropdown-menu-right">
+                                <a class="dropdown-item"
+                                   href="{% url 'main:modal_update_appointment' %}?id={{item.id}}" data-toggle="tooltip"
+                                   data-modal-size="modal-lg"
+                                   data-open-modal>
+                                    Update Appointment
+                                </a>
+                                 <a class="dropdown-item"
+                                   href="{% url 'main:modal_delete_appointment' %}?id={{item.id}}" data-toggle="tooltip"
+                                   data-open-modal>
+                                    Delete Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr class="center">
+                    <td colspan="4">
+                        <h4>No items to show...</h4>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% include 'partials/partial_pagination.html' with page_data=data %}
+</div>
