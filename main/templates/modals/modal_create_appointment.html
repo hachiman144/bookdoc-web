@@ -58,7 +58,7 @@
                     <div class="col-12 mb15 plr15">
                         <label class="input-label required">Comment</label>
                         <div class="custom-input-group">
-                            <textarea name="comment" placeholder="Comment Here" class="form-control sm full-width"></textarea>
+                            <textarea name="comment" placeholder="Comment Here" class="form-control sm full-width" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -88,6 +88,30 @@ $(document).ready(function(e){
         clear_after: true,
         headers: {"X-CSRFToken": "{{csrf_token}}",},
         on_init: function(_obj){
+             _obj.find("#date").datepicker({
+                'startDate': new Date(),
+                'orientation': 'bottom',
+                'format': 'MM, dd yyyy',
+                'todayHighlight': true,
+                'daysOfWeekDisabled': [0]
+            });
+            _obj.find('#time-from').timepicker({
+                'scrollDefault': 'now',
+                'listWidth': 1,
+                'minTime': '9:00am',
+                'maxTime': '5:00pm'
+            });
+            _obj.find('#time-to').timepicker({
+                'scrollDefault': 'now',
+                'listWidth': 1,
+                'minTime': '9:00am',
+                'maxTime': '5:00pm'
+            });
+            _obj.find('#time-from').on('changeTime',function(){
+                let time = addMinutes($(this).timepicker('getTime', new Date()), 30);
+                _obj.find("#time-to").val("")
+                _obj.find("#time-to").timepicker('option', {'minTime': time});
+            });
         },
         success: function(response, _obj){
             if(response.success){
@@ -111,24 +135,6 @@ $(document).ready(function(e){
         },
         error: function(response){$("#general_alert").markAlertfy({type: "modal"});},
         pre_submit: function(response){}
-    });
-    $("#date").datepicker({
-        'orientation': 'bottom',
-        'format': 'MM, dd yyyy',
-        'todayHighlight': true,
-        'daysOfWeekDisabled': [0]
-    });
-    $('#time-from').timepicker({
-        'scrollDefault': 'now',
-        'listWidth': 1,
-        'minTime': '9:00am',
-        'maxTime': '5:00pm'
-    });
-    $('#time-to').timepicker({
-        'scrollDefault': 'now',
-        'listWidth': 1,
-        'minTime': '9:00am',
-        'maxTime': '5:00pm'
     });
 });
 </script>

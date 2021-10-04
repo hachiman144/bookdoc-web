@@ -112,13 +112,11 @@ def ajax_delete_appointment(request):
     response = delete_appointment(request, post_data, data.get('appointment_id'))
 
     try:
-        response_data = response.json()
-
         if response.status_code in range(200, 299):
             success = True
-            message = response_data['message']
+            message = "Appointment Successfully deleted!"
         else:
-            message = response_data['error']['generic']
+            message = "Appointment not deleted Successfully."
     except Exception as e:
         print(e)
 
